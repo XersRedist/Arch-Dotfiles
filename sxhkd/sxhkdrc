@@ -1,0 +1,109 @@
+
+##### ---> Fast acces to apps <--- #####
+
+# Terminal
+super + Return
+	kitty
+
+# Program launcher
+super + @space
+	rofi -no-lazy-grab -show drun -theme ~/.config/rofi/styles/applauncher.rasi
+
+# Program power control 
+super + x
+	sh ~/.config/rofi/scripts/powermenu.sh
+
+##### ---> System control <--- #####
+
+#Brightness UP
+XF86MonBrightnessUp
+	lux -a 10 && notify-send -u low -t 1500 "Brightness Up"
+
+#Brightness Down
+XF86MonBrightnessDown
+	lux -s 10 && notify-send -u low -t 1500 "Brightness Down"
+
+#Volume Down
+XF86AudioLowerVolume
+	amixer -Mq set Master,0 5%- unmute && notify-send -u low -t 1500 "Volume Down"
+
+#Volume Up
+XF86AudioRaiseVolume
+	amixer -Mq set Master,0 5%+ unmute && notify-send -u low -t 1500 "Volume Up" 
+
+#Volume Mute
+XF86AudioMute
+	amixer -q set Master toggle && notify-send -u low -t 1500 "Muted"
+
+#Dual monitor load
+super + shift + m
+	optimus-manager --switch nvidia --no-confirm
+
+##### ---> BSWPM shurtcuts <--- #####
+
+# Reload shurtcuts
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+super + {_,shift + }w
+	bspc node -{c,k}
+
+# swap the current node and the biggest window
+super + g
+	bspc node -s biggest.window
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# focus the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the next/previous window in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+# Resize node
+super + ctrl + {Left,Down,Up,Right}
+  sh ~/.config/bspwm/scripts/resize {west,south,north,east}
+
+#Move floating node
+super + alt + {Left,Down,Up,Right}
+  bspc node -v {-20 0,0 20,0 -20,20 0}
+

@@ -1,0 +1,120 @@
+configuration {
+	font:							"FantasqueSansMono Nerd Font 12";
+    show-icons:                     false;
+	icon-theme: 					"Papirus";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+    fullscreen:                     false;
+	hide-scrollbar: 				true;
+	sidebar-mode: 					false;
+}
+
+* {
+    background:                     #0f1419;
+    background-alt:              	#00000000;
+    background-bar:                 #f2f2f215;
+    foreground:                     #f2f2f2EE;
+}
+
+window {
+    transparency:                   "real";
+    background-color:               #191724;
+    text-color:                     @foreground;
+    border-radius:                  0px;
+    height:                         25.5%;
+    width:                          45%;
+    location:                       center;
+    x-offset:                       0;
+    y-offset:                       0;
+}
+
+prompt {
+    enabled: 						true;
+    padding:                        0.5% 0.5% 0.5% 0%;
+	background-color: 				@background-alt;
+	text-color: 					@foreground;
+}
+
+textbox-prompt-colon {
+	expand: 						false;
+	str: 							"System |";
+	background-color: 				@background-alt;
+	text-color: 					@foreground;
+    padding:                        0.5% 0.5% 0.5% 0%;
+}
+
+inputbar {
+	children: 						[ textbox-prompt-colon, prompt ];
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    expand:                         false;
+    border:                  		0% 0% 0% 0.2%;
+    border-radius:                  0% 0% 0% 0%;
+    border-color:                  	@border;
+    margin:                         0% 21.3% 0% 0%;
+    padding:                        0.5%;
+    position:                       center;
+}
+
+listview {
+    background-color:               #191724;
+    margin:                         0% 0% 0% 0%;
+    spacing:                        2%;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         horizontal;
+}
+
+mainbox {
+    background-color:               #191724;
+    children:                       [ inputbar, listview ];
+    spacing:                        3.5%;
+    padding:                        2% 0% 0% 2%;
+}
+
+element {
+    background-color:               #191724;
+    text-color:                     #e0def4;
+    orientation:                    horizontal;
+    border-radius:                  1%;
+}
+
+element-text {
+	font:							"feather 32";
+    expand:                         true;
+    background-color:               #191724;
+    text-color:                     #e0def4;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         2.5% 2.7% 2.5% 2.7%;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color:               @urgent;
+    text-color:                     @foreground;
+    border-radius:                  0.2%;
+}
+
+element normal.active,
+element alternate.active {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+}
+
+element selected {
+    text-color:                     #c4a7e7;
+	border:							0.1% 0.1% 0.1% 0.1%;
+    border-radius:                  12px;
+    border-color:                  	#908caa;
+}
+
+element selected.urgent {
+    background-color:               @urgent;
+    color:                     #b7b9e1;
+}
+
+element selected.active {
+    background-color:               @background-alt;
+    color:                          @foreground;
+}
